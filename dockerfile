@@ -8,7 +8,7 @@ ARG http_proxy
 ########################
 
 ARG OPENCV_VERSION=4.0.0
-ARG OPENCV_INSTALL_PATH=/usr/local/oepncv
+ARG OPENCV_INSTALL_PATH=/usr/local/opencv
 
 RUN apt-get update && \
         apt-get install -y \
@@ -104,4 +104,5 @@ RUN cd $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/ && mkdir build && cd build \
     && make -j$NUMPROC install \
     && rm -r $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/build
 
+RUN ln -s $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/3rdparty/ippicv/unpack/ippicv_lnx/lib/intel64/libippicv.a /usr/local/lib/libippicv.a
 RUN tar cvzf opencv-$OPENCV_VERSION.tar.gz --directory=$OPENCV_INSTALL_PATH
