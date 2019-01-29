@@ -102,7 +102,8 @@ RUN cd $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/ && mkdir build && cd build \
     .. \
     && export NUMPROC=$(nproc --all) \
     && make -j$NUMPROC install \
-    && rm -r $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/build
+    && cd .. \
+    && rm -r $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/build && ldconfig
 
 RUN ln -s $OPENCV_INSTALL_PATH/opencv-$OPENCV_VERSION/3rdparty/ippicv/unpack/ippicv_lnx/lib/intel64/libippicv.a /usr/local/lib/libippicv.a
-RUN tar cvzf opencv-$OPENCV_VERSION.tar.gz --directory=$OPENCV_INSTALL_PATH
+#RUN tar cvzf opencv-$OPENCV_VERSION.tar.gz --directory=$OPENCV_INSTALL_PATH
